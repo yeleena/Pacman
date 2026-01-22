@@ -1,0 +1,11 @@
+/*
+ * La configuration du projet Gradle.
+ */
+
+plugins {
+    // Le plugin foojay-resolver permet de télécharger automatiquement un JDK.
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+// Le nom du projet.
+rootProject.name = 'projet-2025-2026'

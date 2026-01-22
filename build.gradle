@@ -1,0 +1,48 @@
+/*
+ * La configuration de Gradle pour compiler et exécuter le projet.
+ */
+
+// Les plugins permettant à Gradle de gérer le projet en tant qu'application JavaFX.
+plugins {
+    id 'application'
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'eclipse'
+}
+
+// La version du langage Java utilisée dans le projet.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// Les dépôts d'où les dépendances doivent être téléchargées.
+repositories {
+    mavenCentral()
+}
+
+// Les dépendances du projet (en particulier le processeur d'annotations).
+dependencies {
+    implementation files("lib/dp-processor.jar")
+    annotationProcessor files("lib/dp-processor.jar")
+}
+
+// Le nom de la classe contenant la méthode "main".
+application {
+	mainModule = 'fr.univartois.butinfo.r304.pacman'
+    mainClass = 'fr.univartois.butinfo.r304.pacman.PacmanApplication'
+}
+
+// La version de JavaFX utilisée dans le projet, et les composants requis.
+javafx {
+    version = '21.0.1'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics']
+}
+
+eclipse.classpath.file.whenMerged {
+    entries.findAll { it.properties.kind.equals('lib') }.each {
+        it.entryAttributes['module'] = 'true'
+    }
+}
+
